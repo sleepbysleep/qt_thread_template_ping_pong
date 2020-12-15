@@ -1,0 +1,1 @@
+# qt_thread_template_ping_pong
