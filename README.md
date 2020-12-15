@@ -6,8 +6,10 @@ There are three steps to do threading.
 3. establish ping-pong operation between Dialog, and WorkerThread.
 
 # Object from Worker and to WorkerThread
+![alt text](https://github.com/sleepbysleep/qt_thread_template_ping_pong/edit/main/images/worker_thread.png)
 
 # Layout of signals and slots
+![alt text](https://github.com/sleepbysleep/qt_thread_template_ping_pong/edit/main/images/signals_slots.png)
 
 # Ping-Pong Operation
-
+![alt text](https://github.com/sleepbysleep/qt_thread_template_ping_pong/edit/main/images/ping_pong.png)
