@@ -8,7 +8,7 @@ There are three steps to do threading.
 # Object from Worker and to WorkerThread
 ![plot](./images/worker_thread.png)
 
-'''
+```
 Dialog::Dialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Dialog)
@@ -16,12 +16,12 @@ Dialog::Dialog(QWidget *parent)
     ...
     this->threadWorker = new Worker();
     this->threadWorker->moveToThread(&this->workerThread);
-'''
+```
 
 # Layout of signals and slots
 ![plot](./images/signals_slots.png)
 
-'''
+```
 Dialog::Dialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Dialog)
@@ -31,13 +31,12 @@ Dialog::Dialog(QWidget *parent)
     connect(this, &Dialog::triggerPingPong, this->threadWorker, &Worker::doSomething);
     connect(this->threadWorker, &Worker::dataReady, this, &Dialog::handleData);
     connect(this->threadWorker, &Worker::errorAlert, this, &Dialog::handleError);
-'''
+```
 
 # Ping-Pong Operation
 ![plot](./images/ping_pong.png)
 
-
-'''
+```
 Dialog::Dialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Dialog)
@@ -49,10 +48,9 @@ Dialog::Dialog(QWidget *parent)
 
     emit triggerPingPong(0);
 }
+```
 
-'''
-
-'''
+```
 void Worker::doSomething(const int typeOfSource)
 {
     //qDebug() << typeOfSource;
@@ -68,9 +66,9 @@ void Worker::doSomething(const int typeOfSource)
 
     emit dataReady(this->buffer, 100, typeOfSource);
 }
-'''
+```
 
-'''
+```
 void Dialog::handleData(const void *buffer, int len, int from)
 {
     // TODO: Process data
@@ -88,4 +86,4 @@ void Dialog::handleData(const void *buffer, int len, int from)
         emit triggerPingPong(from);
     }
 }
-'''
+```
