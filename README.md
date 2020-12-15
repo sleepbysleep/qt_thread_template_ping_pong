@@ -1,16 +1,17 @@
-# QtThreadTemplate in way of Ping-Pong operation
+# QtThreadTemplate in a way of Ping-Pong based streaming
 This is a QThread example in the way of ping-pong interaction.
 There are three steps to do threading.
-1. create a object from Worker, and move into QThread.
+1. create a object from Worker, and move it into QThread.
 2. set up corresponding signals, and slots.
 3. establish ping-pong operation between Dialog, and WorkerThread.
 
 # Object from Worker and to WorkerThread
-Dialog-based widget contains a object from Worker class, which manages to pass there its handle into WorkerThread.
+Dialog-based widget contains a object from Worker class, which manages to be passed its handle into WorkerThread.
 
 ![plot](./images/worker_thread.png)
+
 Then, Worker object is executed on WorkerThread.
-Such a code is described like this;
+The code is described here;
 
 ```
 Dialog::Dialog(QWidget *parent)
@@ -28,7 +29,7 @@ Before establishing ping-pong operation between Dialog, and QThread, correspondi
 
 ![plot](./images/signals_slots.png)
 
-In this construction, it is enough to do connection between Worker object and Dialog widget because of Worker object moved into WorkerThread.
+In this setup, it is enough to do connection between Worker object and Dialog widget because of Worker object already moved into WorkerThread.
 
 ```
 Dialog::Dialog(QWidget *parent)
@@ -43,9 +44,8 @@ Dialog::Dialog(QWidget *parent)
 ```
 
 
-# Ping-Pong Operation
-
-The ping-pong operation between Dialog, and Worker is established by interaction of signals of triggerPingpong and dataReady.
+# Ping-Pong Streaming
+The ping-pong streaming between Dialog, and Worker is established by interaction of signals of triggerPingpong and dataReady.
 
 ![plot](./images/ping_pong.png)
 
@@ -63,7 +63,8 @@ Dialog::Dialog(QWidget *parent)
 }
 ```
 
-The doSomething is executed by signal of triggerPingPong, and then send signal of dataReady back to Dialog::handleData. 
+The doSomething is executed by signal of triggerPingPong, and then send signal of dataReady back to Dialog::handleData.
+
 ```
 void Worker::doSomething(const int typeOfSource)
 {
@@ -83,6 +84,7 @@ void Worker::doSomething(const int typeOfSource)
 ```
 
 In ping-poing way, the handleData sends triggerPingPong again.
+
 ```
 void Dialog::handleData(const void *buffer, int len, int from)
 {
